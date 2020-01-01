@@ -20,8 +20,10 @@ public class LevelGenerator : MonoBehaviour
             {
                 try
                 {
-                    GameObject o = Instantiate(GetObjectFromName(nodeData.spriteValue), new Vector2(nodeData.x * nodeWidth, nodeData.y * nodeHeight), Quaternion.identity);
+                    Object o = Instantiate(GetObjectFromName(nodeData.spriteValue), new Vector2(nodeData.x * nodeWidth, nodeData.y * nodeHeight), Quaternion.identity).GetComponent<Object>();
                     o.transform.SetParent(transform);
+                    o.X = nodeData.x;
+                    o.Y = nodeData.y;
                 }
                 catch
                 {
@@ -33,8 +35,10 @@ public class LevelGenerator : MonoBehaviour
             {
                 try
                 {
-                    GameObject o = Instantiate(GetObjectFromName(nodeData.floorValue), new Vector2(nodeData.x * nodeWidth, nodeData.y * nodeHeight), Quaternion.identity);
+                    Object o = Instantiate(GetObjectFromName(nodeData.floorValue), new Vector2(nodeData.x * nodeWidth, nodeData.y * nodeHeight), Quaternion.identity).GetComponent<Object>();
                     o.transform.SetParent(transform);
+                    o.X = nodeData.x;
+                    o.Y = nodeData.y;
                 }
                 catch
                 {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1848719490525993410}
   - component: {fileID: 4418121967676953292}
+  - component: {fileID: 2052270378}
   m_Layer: 0
   m_Name: Prowler
   m_TagString: Untagged
@@ -80,3 +81,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2052270378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263476809309130508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db58aa42382ad34409f7241d75654c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
