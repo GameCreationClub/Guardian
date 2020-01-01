@@ -163,8 +163,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1534c3db4157c4984b402f28e4f5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFile: {fileID: 0}
-  objects: []
+  levelFile: {fileID: 4900000, guid: 8e7f9a34e93af744d83c1735b9dabf62, type: 3}
+  objects:
+  - name: Stone_Tile
+    prefab: {fileID: 4081927533901506747, guid: 0f247f5cc3e78fc418f9dfd258ed5fe6,
+      type: 3}
+  - name: Stone_Wall
+    prefab: {fileID: 392109635233241300, guid: b5c6b7531ec455540b14deb547c54a11, type: 3}
+  - name: Torch
+    prefab: {fileID: 4293592141454551496, guid: 4d9a782284d2cb847af9650b7d028749,
+      type: 3}
+  - name: Spell_Obelisk
+    prefab: {fileID: 735028579410222134, guid: 3ba46dd116397004fadc5e29b854ff7d, type: 3}
+  - name: Entrance
+    prefab: {fileID: 6309060636482464558, guid: 5800c083be7f16d488d600b2bc365eef,
+      type: 3}
+  - name: Exit
+    prefab: {fileID: 8018771778364318195, guid: f221620cd94cbb349a6857220ea747f0,
+      type: 3}
+  - name: Player
+    prefab: {fileID: 6833788589414751113, guid: 140a7e64b5f091e48b488b79973d45f4,
+      type: 3}
+  - name: Guardian
+    prefab: {fileID: 6096032208887075786, guid: e48abf98b0e6be14a8e54ceb0b3b5b40,
+      type: 3}
+  - name: Gloom
+    prefab: {fileID: 5877778852617411898, guid: 2ef11a36dff4c664188e3ed12befad14,
+      type: 3}
+  - name: Prowler
+    prefab: {fileID: 1263476809309130508, guid: 3ed2342d652d2db4ca332657c56494ec,
+      type: 3}
+  - name: Aspect
+    prefab: {fileID: 6612996945226411783, guid: 828cea751e815854ea6c468ce9c73ce3,
+      type: 3}
   nodeWidth: 1
   nodeHeight: 1
 --- !u!1 &519420028
