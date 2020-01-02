@@ -12,7 +12,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         entities = new List<Entity>(FindObjectsOfType<Entity>());
+        SortEntities();
 
+        InvokeTurn();
+    }
+
+    public void SortEntities()
+    {
         for (int i = 0; i < entities.Count - 1; i++)
         {
             for (int j = 0; j < entities.Count - 1; j++)
@@ -27,8 +33,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-        InvokeTurn();
     }
 
     public void InvokeTurn()
