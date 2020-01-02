@@ -35,6 +35,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddEntity(Entity e)
+    {
+        entities.Add(e);
+        SortEntities();
+    }
+
+    public void RemoveEntity(Entity e)
+    {
+        entities.Remove(e);
+    }
+
     public void InvokeTurn()
     {
         amountOfTurnsTaken += 0.5f;
