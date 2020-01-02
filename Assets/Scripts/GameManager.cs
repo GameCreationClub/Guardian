@@ -104,8 +104,18 @@ public class GameManager : MonoBehaviour
     {
         if (entities[currentEntityTurn].CompareTag("Player"))
         {
-            if (o.CompareTag("Walkable"))
-                FindObjectOfType<Adventurer>().MoveTo(o.Vector2Position);
+            if (currentAction == 0)
+            {
+                if (o.CompareTag("Walkable"))
+                    entities[currentEntityTurn].MoveTo(o.Vector2Position);
+            }
+            else
+            {
+                if (o is Entity)
+                {
+                    entities[currentEntityTurn].Attack(o.GetComponent<Entity>());
+                }
+            }
         }
     }
 }

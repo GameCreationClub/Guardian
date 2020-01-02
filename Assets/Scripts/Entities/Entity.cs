@@ -46,7 +46,10 @@ public abstract class Entity : Object
     public void Attack(Entity e)
     {
         if (e != null)
+        {
             e.TakeDamage(atk);
+            GameManager.instance.NextTurn();
+        }
     }
 
     protected void TakeDamage(int damage)
