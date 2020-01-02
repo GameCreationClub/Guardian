@@ -6,7 +6,6 @@ public class Prowler : Entity
     {
         print("Prowler movement");
         MoveTo(new Vector2(6, 7));
-        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()

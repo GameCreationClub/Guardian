@@ -8,12 +8,12 @@ public class Adventurer : Entity
     {
         print("Adventurer movement");
         MoveTo(new Vector2(6, 6));
-        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()
     {
         print("Adventurer attack");
+        Attack(FindObjectOfType<Aspect>());
         gameManager.NextTurn();
     }
 }

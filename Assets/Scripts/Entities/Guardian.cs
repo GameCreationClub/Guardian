@@ -6,12 +6,12 @@ public class Guardian : Entity
     {
         print("Guardian movement");
         MoveTo(new Vector2(8, 6));
-        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()
     {
         print("Guardian attack");
+        Attack(FindObjectOfType<Aspect>());
         gameManager.NextTurn();
     }
 }

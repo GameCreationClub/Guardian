@@ -6,7 +6,6 @@ public class Gloom : Entity
     {
         print("Gloom movement");
         MoveTo(new Vector2(7, 7));
-        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()
