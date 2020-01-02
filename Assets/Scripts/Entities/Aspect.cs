@@ -11,6 +11,6 @@ public class Aspect : Entity
     public override void AttackTurn()
     {
         print("Aspect attack");
-        gameManager.NextTurn();
+        GameManager.instance.NextTurn();
     }
 }

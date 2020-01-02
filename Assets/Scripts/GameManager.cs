@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField] private List<Entity> entities;
 
     private int currentTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
+
+    private Object hoverObject;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -78,5 +87,20 @@ public class GameManager : MonoBehaviour
         }
 
         InvokeTurn();
+    }
+
+    public void OnObjectHover(Object o)
+    {
+        if (hoverObject != null)
+            hoverObject.GetComponent<SpriteRenderer>().color = Color.white;
+
+        hoverObject = o;
+        hoverObject.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+    public void OnObjectClicked(Object o)
+    {
+        if (o.CompareTag("Walkable"))
+            FindObjectOfType<Adventurer>().MoveTo(o.Vector2Position);
     }
 }

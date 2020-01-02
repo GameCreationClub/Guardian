@@ -8,8 +8,6 @@ public abstract class Entity : Object
 
     protected int maxHp;
 
-    protected GameManager gameManager;
-
     private Vector3 moveTo;
     private float moveIncrement;
 
@@ -17,8 +15,9 @@ public abstract class Entity : Object
     {
         maxHp = hp;
 
-        gameManager = FindObjectOfType<GameManager>();
         moveIncrement = init * Time.fixedDeltaTime;
+
+        transform.Translate(Vector3.back);
     }
 
     public abstract void MovementTurn();
@@ -35,6 +34,7 @@ public abstract class Entity : Object
         Y = (int)position.y;
         moveTo = Vector2Position;
 
+        StopCoroutine(MovementAnimation());
         StartCoroutine(MovementAnimation());
     }
 
@@ -62,7 +62,7 @@ public abstract class Entity : Object
     protected void Die()
     {
         print(name + " died");
-        gameManager.RemoveEntity(this);
+        GameManager.instance.RemoveEntity(this);
 
         Destroy(gameObject);
     }
@@ -96,7 +96,7 @@ public abstract class Entity : Object
             transform.position = moveTo;
 
             StopCoroutine(MovementAnimation());
-            gameManager.NextTurn();
+            GameManager.instance.NextTurn();
         }
     }
 }

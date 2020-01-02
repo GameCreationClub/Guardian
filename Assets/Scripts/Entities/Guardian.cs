@@ -12,6 +12,6 @@ public class Guardian : Entity
     {
         print("Guardian attack");
         Attack(FindObjectOfType<Aspect>());
-        gameManager.NextTurn();
+        GameManager.instance.NextTurn();
     }
 }

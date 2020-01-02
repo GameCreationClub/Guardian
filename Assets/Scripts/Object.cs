@@ -14,4 +14,14 @@ public class Object : MonoBehaviour
     {
         get { return new Vector3(X, Y); }
     }
+
+    private void OnMouseOver()
+    {
+        GameManager.instance.OnObjectHover(this);
+    }
+
+    private void OnMouseDown()
+    {
+        GameManager.instance.OnObjectClicked(this);
+    }
 }

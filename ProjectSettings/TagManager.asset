@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Entrance
   - Exit
+  - Walkable
   layers:
   - Default
   - TransparentFX

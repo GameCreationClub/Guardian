@@ -14,6 +14,6 @@ public class Adventurer : Entity
     {
         print("Adventurer attack");
         Attack(FindObjectOfType<Aspect>());
-        gameManager.NextTurn();
+        GameManager.instance.NextTurn();
     }
 }

@@ -11,6 +11,6 @@ public class Prowler : Entity
     public override void AttackTurn()
     {
         print("Prowler attack");
-        gameManager.NextTurn();
+        GameManager.instance.NextTurn();
     }
 }
