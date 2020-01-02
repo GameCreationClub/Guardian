@@ -1,4 +1,6 @@
-﻿public class Adventurer : Entity
+﻿using UnityEngine;
+
+public class Adventurer : Entity
 {
     public int mana;
 
