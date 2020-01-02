@@ -15,13 +15,18 @@ public class Object : MonoBehaviour
         get { return new Vector3(X, Y); }
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        GameManager.instance.OnObjectHover(this);
+        GameManager.instance.OnObjectMouseEnter(this);
+    }
+
+    private void OnMouseExit()
+    {
+        GameManager.instance.OnObjectMouseExit(this);
     }
 
     private void OnMouseDown()
     {
-        GameManager.instance.OnObjectClicked(this);
+        GameManager.instance.OnObjectMouseDown(this);
     }
 }

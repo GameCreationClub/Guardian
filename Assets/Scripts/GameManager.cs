@@ -8,10 +8,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<Entity> entities;
 
-    private int currentTurn = 0, currentAction = 0;
+    private int currentEntityTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
-
-    private Object hoverObject;
 
     private void Awake()
     {
@@ -62,11 +60,11 @@ public class GameManager : MonoBehaviour
         {
             if (currentAction == 0)
             {
-                entities[currentTurn].MovementTurn();
+                entities[currentEntityTurn].MovementTurn();
             }
             else
             {
-                entities[currentTurn].AttackTurn();
+                entities[currentEntityTurn].AttackTurn();
             }
         }
     }
@@ -78,29 +76,36 @@ public class GameManager : MonoBehaviour
         if (currentAction > 1)
         {
             currentAction = 0;
-            currentTurn++;
+            currentEntityTurn++;
 
-            if (currentTurn >= entities.Count)
+            if (currentEntityTurn >= entities.Count)
             {
-                currentTurn = 0;
+                currentEntityTurn = 0;
             }
         }
 
         InvokeTurn();
     }
 
-    public void OnObjectHover(Object o)
+    public void OnObjectMouseEnter(Object o)
     {
-        if (hoverObject != null)
-            hoverObject.GetComponent<SpriteRenderer>().color = Color.white;
-
-        hoverObject = o;
-        hoverObject.GetComponent<SpriteRenderer>().color = Color.red;
+        if (entities[currentEntityTurn].CompareTag("Player"))
+        {
+            o.GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
 
-    public void OnObjectClicked(Object o)
+    public void OnObjectMouseExit(Object o)
     {
-        if (o.CompareTag("Walkable"))
-            FindObjectOfType<Adventurer>().MoveTo(o.Vector2Position);
+        o.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void OnObjectMouseDown(Object o)
+    {
+        if (entities[currentEntityTurn].CompareTag("Player"))
+        {
+            if (o.CompareTag("Walkable"))
+                FindObjectOfType<Adventurer>().MoveTo(o.Vector2Position);
+        }
     }
 }
