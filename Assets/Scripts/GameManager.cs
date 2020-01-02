@@ -129,7 +129,10 @@ public class GameManager : MonoBehaviour
             {
                 if (o is Entity)
                 {
-                    currentEntity.Attack(o.GetComponent<Entity>());
+                    if (currentEntity.CanAttack(o.Vector2Position))
+                    {
+                        currentEntity.Attack(o.GetComponent<Entity>());
+                    }
                 }
             }
         }

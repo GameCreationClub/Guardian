@@ -55,6 +55,12 @@ public abstract class Entity : Object
         }
     }
 
+    public void RotateTo(Vector2 rotation)
+    {
+        facingDirection = rotation;
+        GameManager.instance.NextTurn();
+    }
+
     public bool CanRotateTo(Vector2 rotateTo)
     {
         Vector2 absRotateTo = GameManager.AbsVector2(rotateTo);
@@ -73,19 +79,21 @@ public abstract class Entity : Object
         }
     }
 
-    public void RotateTo(Vector2 rotation)
-    {
-        facingDirection = rotation;
-        GameManager.instance.NextTurn();
-    }
-
     public void Attack(Entity e)
     {
-        if (e != null)
+        if (e != null && e != this)
         {
             e.TakeDamage(atk);
             GameManager.instance.NextTurn();
         }
+    }
+
+    public bool CanAttack(Vector2 attack)
+    {
+        Vector2 moveInFacingDirection = Vector2Position + facingDirection;
+        Vector2 distanceFromMove = attack - moveInFacingDirection;
+
+        return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(facingDirection);
     }
 
     protected void TakeDamage(int damage)
