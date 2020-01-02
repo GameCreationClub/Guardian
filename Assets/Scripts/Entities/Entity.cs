@@ -8,18 +8,14 @@ public abstract class Entity : Object
 
     protected GameManager gameManager;
 
+    private Vector3 moveTo;
+    private float moveIncrement;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        moveIncrement = init * Time.fixedDeltaTime;
     }
-
-    /*private void FixedUpdate()
-    {
-        if (Vector2.Distance(transform.position, new Vector2(X, Y)) > 0.025f)
-        {
-            transform.Translate((new Vector3(X, Y) - transform.position).normalized * init * Time.fixedDeltaTime);
-        }
-    }*/
 
     public abstract void MovementTurn();
     public abstract void AttackTurn();
@@ -33,6 +29,7 @@ public abstract class Entity : Object
     {
         X = (int)position.x;
         Y = (int)position.y;
+        moveTo = new Vector2(X, Y);
 
         StartCoroutine(MovementAnimation());
     }
@@ -41,13 +38,15 @@ public abstract class Entity : Object
     {
         yield return new WaitForEndOfFrame();
 
-        if (Vector2.Distance(transform.position, new Vector2(X, Y)) > 0.025f)
+        if (Vector2.Distance(transform.position, moveTo) > moveIncrement)
         {
-            transform.Translate((new Vector3(X, Y) - transform.position).normalized * init * Time.fixedDeltaTime);
+            transform.Translate((moveTo - transform.position).normalized * moveIncrement);
             StartCoroutine(MovementAnimation());
         }
         else
         {
+            transform.position = moveTo;
+
             StopCoroutine(MovementAnimation());
             gameManager.NextTurn();
         }
