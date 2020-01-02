@@ -4,7 +4,8 @@ using UnityEngine;
 public abstract class Entity : Object
 {
     public int hp, atk, init;
-    public Vector2 facingDirection;
+    public bool canRotate180;
+    public Vector2 facingDirection = Vector2.up;
 
     protected int maxHp;
 
@@ -18,6 +19,7 @@ public abstract class Entity : Object
         moveIncrement = init * Time.fixedDeltaTime;
 
         transform.Translate(Vector3.back);
+        facingDirection = Vector2.up;
     }
 
     public abstract void MovementTurn();
@@ -38,9 +40,43 @@ public abstract class Entity : Object
         StartCoroutine(MovementAnimation());
     }
 
+    public bool CanMoveTo(Vector2 moveToPos)
+    {
+        if ((moveToPos - Vector2Position).normalized.Equals(facingDirection))
+        {
+            return Vector2.Distance(moveToPos, Vector2Position) <= init;
+        }
+        else
+        {
+            Vector2 moveInFacingDirection = Vector2Position + facingDirection;
+            Vector2 distanceFromMove = moveToPos - moveInFacingDirection;
+
+            return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(facingDirection);
+        }
+    }
+
+    public bool CanRotateTo(Vector2 rotateTo)
+    {
+        Vector2 absRotateTo = GameManager.AbsVector2(rotateTo);
+
+        if (rotateTo.Equals(facingDirection))
+        {
+            return false;
+        }
+        else if (canRotate180)
+        {
+            return absRotateTo.x != absRotateTo.y && (absRotateTo.x == 1f || absRotateTo.y == 1f);
+        }
+        else
+        {
+            return absRotateTo.x != Mathf.Abs(facingDirection.x) && absRotateTo.y != Mathf.Abs(facingDirection.y) && (absRotateTo.x == 1f || absRotateTo.y == 1f);
+        }
+    }
+
     public void RotateTo(Vector2 rotation)
     {
         facingDirection = rotation;
+        GameManager.instance.NextTurn();
     }
 
     public void Attack(Entity e)

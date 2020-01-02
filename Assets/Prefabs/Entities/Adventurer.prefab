@@ -123,5 +123,6 @@ MonoBehaviour:
   hp: 5
   atk: 0
   init: 3
+  canRotate180: 1
   facingDirection: {x: 0, y: 0}
   mana: 20

@@ -123,4 +123,5 @@ MonoBehaviour:
   hp: 5
   atk: 2
   init: 1
+  canRotate180: 1
   facingDirection: {x: 0, y: 0}

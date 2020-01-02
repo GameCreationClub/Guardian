@@ -102,20 +102,46 @@ public class GameManager : MonoBehaviour
 
     public void OnObjectMouseDown(Object o)
     {
-        if (entities[currentEntityTurn].CompareTag("Player"))
+        Entity currentEntity = entities[currentEntityTurn];
+
+        if (currentEntity.CompareTag("Player"))
         {
             if (currentAction == 0)
             {
                 if (o.CompareTag("Walkable"))
-                    entities[currentEntityTurn].MoveTo(o.Vector2Position);
+                {
+                    if (currentEntity.CanMoveTo(o.Vector2Position))
+                    {
+                        currentEntity.MoveTo(o.Vector2Position);
+                    }
+                    else
+                    {
+                        Vector2 rotateTo = (o.Vector2Position - currentEntity.Vector2Position).normalized;
+
+                        if (currentEntity.CanRotateTo(rotateTo))
+                        {
+                            currentEntity.RotateTo(rotateTo);
+                        }
+                    }
+                }
             }
             else
             {
                 if (o is Entity)
                 {
-                    entities[currentEntityTurn].Attack(o.GetComponent<Entity>());
+                    currentEntity.Attack(o.GetComponent<Entity>());
                 }
             }
         }
+    }
+
+    public static Vector2 AbsVector2(Vector2 v)
+    {
+        return new Vector2(Mathf.Abs(v.x), Mathf.Abs(v.y));
+    }
+
+    public static Vector2 FlipVector2(Vector2 v)
+    {
+        return new Vector2(v.y, v.x);
     }
 }
