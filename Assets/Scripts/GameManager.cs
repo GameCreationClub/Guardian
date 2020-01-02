@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Entity> entities;
+    [SerializeField] private List<Entity> entities;
 
     private int currentTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
