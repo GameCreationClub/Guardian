@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6096032208887075796}
   - component: {fileID: 6096032208887075797}
-  - component: {fileID: 1945623725}
+  - component: {fileID: -2040051296161872490}
   m_Layer: 0
   m_Name: Guardian
   m_TagString: Untagged
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1945623725
+--- !u!114 &-2040051296161872490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,6 +90,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6096032208887075786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db58aa42382ad34409f7241d75654c71, type: 3}
+  m_Script: {fileID: 11500000, guid: 3243679b58646ab4e92523c3ea1757ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 12
+  atk: 5
+  init: 2
+  facingDirection: {x: 0, y: 0}

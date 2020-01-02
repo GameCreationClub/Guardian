@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6612996945226411769}
   - component: {fileID: 6612996945226411782}
-  - component: {fileID: 1428453504}
+  - component: {fileID: 6817481504770981459}
   m_Layer: 0
   m_Name: Aspect
   m_TagString: Untagged
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1428453504
+--- !u!114 &6817481504770981459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,6 +90,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6612996945226411783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db58aa42382ad34409f7241d75654c71, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a11dcb0bfe224e4ababc4c0e7a8efcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 5
+  atk: 2
+  init: 1
+  facingDirection: {x: 0, y: 0}
