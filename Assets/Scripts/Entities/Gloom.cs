@@ -1,9 +1,12 @@
-﻿public class Gloom : Entity
+﻿using UnityEngine;
+
+public class Gloom : Entity
 {
     public override void MovementTurn()
     {
         print("Gloom movement");
-        gameManager.NextTurn();
+        MoveTo(new Vector2(7, 7));
+        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()

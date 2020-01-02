@@ -1,9 +1,12 @@
-﻿public class Guardian : Entity
+﻿using UnityEngine;
+
+public class Guardian : Entity
 {
     public override void MovementTurn()
     {
         print("Guardian movement");
-        gameManager.NextTurn();
+        MoveTo(new Vector2(8, 6));
+        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()

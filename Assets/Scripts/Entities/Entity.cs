@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class Entity : Object
 {
@@ -11,6 +12,14 @@ public abstract class Entity : Object
     {
         gameManager = FindObjectOfType<GameManager>();
     }
+
+    /*private void FixedUpdate()
+    {
+        if (Vector2.Distance(transform.position, new Vector2(X, Y)) > 0.025f)
+        {
+            transform.Translate((new Vector3(X, Y) - transform.position).normalized * init * Time.fixedDeltaTime);
+        }
+    }*/
 
     public abstract void MovementTurn();
     public abstract void AttackTurn();
@@ -25,6 +34,22 @@ public abstract class Entity : Object
         X = (int)position.x;
         Y = (int)position.y;
 
-        transform.position = new Vector2(X, Y);
+        StartCoroutine(MovementAnimation());
+    }
+
+    protected IEnumerator MovementAnimation()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (Vector2.Distance(transform.position, new Vector2(X, Y)) > 0.025f)
+        {
+            transform.Translate((new Vector3(X, Y) - transform.position).normalized * init * Time.fixedDeltaTime);
+            StartCoroutine(MovementAnimation());
+        }
+        else
+        {
+            StopCoroutine(MovementAnimation());
+            gameManager.NextTurn();
+        }
     }
 }

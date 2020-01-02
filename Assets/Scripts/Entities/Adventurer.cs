@@ -7,7 +7,8 @@ public class Adventurer : Entity
     public override void MovementTurn()
     {
         print("Adventurer movement");
-        gameManager.NextTurn();
+        MoveTo(new Vector2(6, 6));
+        //gameManager.NextTurn();
     }
 
     public override void AttackTurn()
