@@ -10,6 +10,11 @@ public class LevelGenerator : MonoBehaviour
 
     public float nodeWidth = 1, nodeHeight = 1;
 
+    private void Awake()
+    {
+        GenerateLevel();
+    }
+
     public void GenerateLevel()
     {
         SaveFile saveFile = JsonUtility.FromJson<SaveFile>(levelFile.text);
