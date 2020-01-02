@@ -34,6 +34,11 @@ public abstract class Entity : Object
         StartCoroutine(MovementAnimation());
     }
 
+    public void RotateTo(Vector2 rotation)
+    {
+        facingDirection = rotation;
+    }
+
     protected IEnumerator MovementAnimation()
     {
         yield return new WaitForEndOfFrame();
