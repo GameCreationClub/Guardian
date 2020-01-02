@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public List<Entity> entities;
 
+    private int currentTurn = 0, currentAction = 0;
+    private float amountOfTurnsTaken = 0f;
+
     private void Start()
     {
         entities = new List<Entity>(FindObjectsOfType<Entity>());
@@ -24,5 +27,41 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        InvokeTurn();
+    }
+
+    public void InvokeTurn()
+    {
+        amountOfTurnsTaken += 0.5f;
+        if (amountOfTurnsTaken <= 5f)
+        {
+            if (currentAction == 0)
+            {
+                entities[currentTurn].MovementTurn();
+            }
+            else
+            {
+                entities[currentTurn].AttackTurn();
+            }
+        }
+    }
+
+    public void NextTurn()
+    {
+        currentAction++;
+
+        if (currentAction > 1)
+        {
+            currentAction = 0;
+            currentTurn++;
+
+            if (currentTurn >= entities.Count)
+            {
+                currentTurn = 0;
+            }
+        }
+
+        InvokeTurn();
     }
 }
