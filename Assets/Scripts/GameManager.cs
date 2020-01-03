@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 Entity currentEntity = entities[j];
                 Entity nextEntity = entities[j + 1];
 
-                if (currentEntity.init < nextEntity.init || (currentEntity.init == nextEntity.init && nextEntity is Adventurer || nextEntity is Guardian))
+                if (currentEntity.init < nextEntity.init || (currentEntity.init == nextEntity.init && (nextEntity is Adventurer || nextEntity is Guardian)))
                 {
                     entities[j] = nextEntity;
                     entities[j + 1] = currentEntity;
