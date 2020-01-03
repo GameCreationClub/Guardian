@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (currentEntity.CanAttack(o.Vector2Position))
+                if (o is Entity && currentEntity.CanAttack(o.Vector2Position))
                 {
                     SetCursor(attackCursor);
 
