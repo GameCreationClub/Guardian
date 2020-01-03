@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Sprite rotateCursor;
     public Sprite attackCursor;
 
+    public Slider manaBar;
     public Transform hover;
 
     [SerializeField] private List<Entity> entities;
@@ -211,5 +212,8 @@ public class GameManager : MonoBehaviour
     public static Vector2 FlipVector2(Vector2 v)
     {
         return new Vector2(v.y, v.x);
+    }
+    public void UpdateManaBar(int newMana){
+        manaBar.value = newMana;
     }
 }
