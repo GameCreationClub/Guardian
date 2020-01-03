@@ -116,6 +116,9 @@ public class GameManager : MonoBehaviour
 
         InvokeTurn();
     }
+    public void SkipTurn(){
+        NextTurn();
+    }
 
     public void OnObjectMouseEnter(Object o)
     {
