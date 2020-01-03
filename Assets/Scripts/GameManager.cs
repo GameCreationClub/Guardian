@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public Image customCursor;
+    public Sprite prohibitedCursor;
+    public Sprite moveCursor;
+    public Sprite rotateCursor;
+    public Sprite attackCursor;
+
+    public Transform hover;
 
     [SerializeField] private List<Entity> entities;
 
@@ -22,6 +31,26 @@ public class GameManager : MonoBehaviour
         SortEntities();
 
         InvokeTurn();
+    }
+
+    private void Update()
+    {
+        customCursor.transform.position = Input.mousePosition;
+    }
+
+    private void SetCursor(Sprite cursor)
+    {
+        if (cursor == null)
+        {
+            Cursor.visible = true;
+            customCursor.gameObject.SetActive(false);
+        }
+        else
+        {
+            Cursor.visible = false;
+            customCursor.gameObject.SetActive(true);
+            customCursor.sprite = cursor;
+        }
     }
 
     public void SortEntities()
@@ -72,6 +101,7 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         currentAction++;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         if (currentAction > 1)
         {
@@ -91,13 +121,45 @@ public class GameManager : MonoBehaviour
     {
         if (entities[currentEntityTurn].CompareTag("Player"))
         {
-            o.GetComponent<SpriteRenderer>().color = Color.red;
+            Entity currentEntity = entities[currentEntityTurn];
+
+            hover.gameObject.SetActive(true);
+            hover.position = o.transform.position;
+
+            if (currentAction == 0)
+            {
+                if (currentEntity.CanMoveTo(o.Vector2Position))
+                {
+                    SetCursor(moveCursor);
+                }
+                else if (currentEntity.CanRotateTo((o.Vector2Position - currentEntity.Vector2Position).normalized))
+                {
+                    SetCursor(rotateCursor);
+                }
+                else
+                {
+                    SetCursor(prohibitedCursor);
+                }
+            }
+            else
+            {
+                if (currentEntity.CanAttack(o.Vector2Position))
+                {
+                    SetCursor(attackCursor);
+
+                }
+                else
+                {
+                    SetCursor(prohibitedCursor);
+                }
+            }
         }
     }
 
     public void OnObjectMouseExit(Object o)
     {
-        o.GetComponent<SpriteRenderer>().color = Color.white;
+        hover.gameObject.SetActive(false);
+        SetCursor(null);
     }
 
     public void OnObjectMouseDown(Object o)
