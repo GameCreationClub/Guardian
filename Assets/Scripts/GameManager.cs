@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private List<Entity> entities;
 
+    private Object currentHover;
+
     private int currentEntityTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
 
@@ -51,6 +53,49 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             customCursor.gameObject.SetActive(true);
             customCursor.sprite = cursor;
+        }
+    }
+
+    private void UpdateCursor(Object hoverObject)
+    {
+        if (hoverObject == null || !entities[currentEntityTurn].CompareTag("Player"))
+        {
+            SetCursor(null);
+        }
+        else
+        {
+            Entity currentEntity = entities[currentEntityTurn];
+
+            hover.gameObject.SetActive(true);
+            hover.position = hoverObject.transform.position;
+
+            if (currentAction == 0)
+            {
+                if (currentEntity.CanMoveTo(hoverObject.Vector2Position))
+                {
+                    SetCursor(moveCursor);
+                }
+                else if (currentEntity.CanRotateTo((hoverObject.Vector2Position - currentEntity.Vector2Position).normalized))
+                {
+                    SetCursor(rotateCursor);
+                }
+                else
+                {
+                    SetCursor(prohibitedCursor);
+                }
+            }
+            else
+            {
+                if (hoverObject is Entity && currentEntity.CanAttack(hoverObject.Vector2Position))
+                {
+                    SetCursor(attackCursor);
+
+                }
+                else
+                {
+                    SetCursor(prohibitedCursor);
+                }
+            }
         }
     }
 
@@ -102,7 +147,9 @@ public class GameManager : MonoBehaviour
     public void NextTurn()
     {
         currentAction++;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        if (currentHover != null)
+            UpdateCursor(currentHover.GetComponent<Object>());
 
         if (currentAction > 1)
         {
@@ -124,47 +171,15 @@ public class GameManager : MonoBehaviour
 
     public void OnObjectMouseEnter(Object o)
     {
-        if (entities[currentEntityTurn].CompareTag("Player"))
-        {
-            Entity currentEntity = entities[currentEntityTurn];
-
-            hover.gameObject.SetActive(true);
-            hover.position = o.transform.position;
-
-            if (currentAction == 0)
-            {
-                if (currentEntity.CanMoveTo(o.Vector2Position))
-                {
-                    SetCursor(moveCursor);
-                }
-                else if (currentEntity.CanRotateTo((o.Vector2Position - currentEntity.Vector2Position).normalized))
-                {
-                    SetCursor(rotateCursor);
-                }
-                else
-                {
-                    SetCursor(prohibitedCursor);
-                }
-            }
-            else
-            {
-                if (o is Entity && currentEntity.CanAttack(o.Vector2Position))
-                {
-                    SetCursor(attackCursor);
-
-                }
-                else
-                {
-                    SetCursor(prohibitedCursor);
-                }
-            }
-        }
+        currentHover = o;
+        UpdateCursor(o);
     }
 
     public void OnObjectMouseExit(Object o)
     {
         hover.gameObject.SetActive(false);
-        SetCursor(null);
+        currentHover = null;
+        UpdateCursor(currentHover);
     }
 
     public void OnObjectMouseDown(Object o)
