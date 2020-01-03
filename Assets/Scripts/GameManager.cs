@@ -117,7 +117,8 @@ public class GameManager : MonoBehaviour
 
         InvokeTurn();
     }
-    public void SkipTurn(){
+    public void SkipTurn()
+    {
         NextTurn();
     }
 
@@ -174,19 +175,31 @@ public class GameManager : MonoBehaviour
         {
             if (currentAction == 0)
             {
-                if (o.CompareTag("Walkable"))
+                if (!currentEntity.CanMoveTo(o.Vector2Position))
                 {
-                    if (currentEntity.CanMoveTo(o.Vector2Position))
-                    {
-                        currentEntity.MoveTo(o.Vector2Position);
-                    }
-                    else
-                    {
-                        Vector2 rotateTo = (o.Vector2Position - currentEntity.Vector2Position).normalized;
+                    Vector2 rotateTo = (o.Vector2Position - currentEntity.Vector2Position).normalized;
 
-                        if (currentEntity.CanRotateTo(rotateTo))
+                    if (currentEntity.CanRotateTo(rotateTo))
+                    {
+                        currentEntity.RotateTo(rotateTo);
+                    }
+                }
+                else
+                {
+                    if (o.CompareTag("Walkable"))
+                    {
+                        if (currentEntity.CanMoveTo(o.Vector2Position))
                         {
-                            currentEntity.RotateTo(rotateTo);
+                            currentEntity.MoveTo(o.Vector2Position);
+                        }
+                        else
+                        {
+                            Vector2 rotateTo = (o.Vector2Position - currentEntity.Vector2Position).normalized;
+
+                            if (currentEntity.CanRotateTo(rotateTo))
+                            {
+                                currentEntity.RotateTo(rotateTo);
+                            }
                         }
                     }
                 }
@@ -213,7 +226,8 @@ public class GameManager : MonoBehaviour
     {
         return new Vector2(v.y, v.x);
     }
-    public void UpdateManaBar(int newMana){
+    public void UpdateManaBar(int newMana)
+    {
         manaBar.value = newMana;
     }
 }
