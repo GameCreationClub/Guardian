@@ -77,7 +77,6 @@ public class Prowler : Enemy
             }
 
             currentTargetPosition += currentTarget.Vector2Position;
-            print(currentTargetPosition);
             MovementAi(currentTargetPosition);
         }
     }

@@ -18,7 +18,7 @@ public abstract class Entity : Object
         maxHp = hp;
         isPlayer = CompareTag("Player");
 
-        moveIncrement = init * Time.fixedDeltaTime;
+        moveIncrement = init * Time.deltaTime;
 
         transform.Translate(Vector3.back);
         facingDirection = Vector2.up;
@@ -141,9 +141,6 @@ public abstract class Entity : Object
         print(name + " died");
         isDead = true;
         gameObject.SetActive(false);
-        //GameManager.instance.RemoveEntity(this);
-
-        //Destroy(gameObject);
     }
 
     protected void ChangeHp(int change)
