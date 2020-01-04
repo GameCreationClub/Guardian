@@ -118,6 +118,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool IsEntityAtPosition(Vector2 position)
+    {
+        foreach (Entity e in entities)
+        {
+            if (e.Vector2Position.Equals(position))
+                return true;
+        }
+
+        return false;
+    }
+
     public void SortEntities()
     {
         for (int i = 0; i < entities.Count - 1; i++)

@@ -65,16 +65,22 @@ public abstract class Entity : Object
 
     public bool CanMoveTo(Vector2 moveToPos)
     {
-        if ((moveToPos - Vector2Position).normalized.Equals(facingDirection))
-        {
-            return Vector2.Distance(moveToPos, Vector2Position) <= init;
-        }
+        if (GameManager.instance.IsEntityAtPosition(moveToPos))
+            return false;
+
         else
         {
-            Vector2 moveInFacingDirection = Vector2Position + facingDirection;
-            Vector2 distanceFromMove = moveToPos - moveInFacingDirection;
+            if ((moveToPos - Vector2Position).normalized.Equals(facingDirection))
+            {
+                return Vector2.Distance(moveToPos, Vector2Position) <= init;
+            }
+            else
+            {
+                Vector2 moveInFacingDirection = Vector2Position + facingDirection;
+                Vector2 distanceFromMove = moveToPos - moveInFacingDirection;
 
-            return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(GameManager.AbsVector2(facingDirection));
+                return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(GameManager.AbsVector2(facingDirection));
+            }
         }
     }
 
@@ -106,7 +112,7 @@ public abstract class Entity : Object
     {
         if (e != null && e != this)
         {
-            print(name + " attacked " + e.name);
+            print(name + " attacked " + e.name + " for " + atk + " damage");
             GameManager.instance.NextTurn();
             e.TakeDamage(atk);
         }

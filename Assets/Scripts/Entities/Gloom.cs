@@ -22,12 +22,9 @@ public class Gloom : Enemy
         Vector2 currentTargetPosition = currentTarget.Vector2Position - GameManager.RoundVector2((currentTarget.Vector2Position - Vector2Position).normalized);
 
         if (CanAttack(currentTarget.Vector2Position))
-        {
             GameManager.instance.NextTurn();
-            return;
-        }
-
-        MovementAi(currentTarget, currentTargetPosition);
+        else
+            MovementAi(currentTarget, currentTargetPosition);
     }
 
     public override void AttackTurn()

@@ -8,11 +8,11 @@ public class Enemy : Entity
     {
         if ((currentTargetPositionAim - Vector2Position).normalized.Equals(facingDirection))
         {
-            if (Vector2.Distance(Vector2Position, currentTargetPositionAim) > 1.42f)
+            if (Vector2.Distance(Vector2Position, currentTargetPositionAim) >= 1.42f && CanMoveTo(Vector2Position + facingDirection * init))
             {
                 Move(facingDirection * init);
             }
-            else if (Vector2.Distance(Vector2Position, currentTargetPositionAim) >= 1f)
+            else if (Vector2.Distance(Vector2Position, currentTargetPositionAim) >= 1f && CanMoveTo(Vector2Position + facingDirection))
             {
                 Move(facingDirection);
             }
@@ -29,6 +29,7 @@ public class Enemy : Entity
 
             if (absNormalizedDistance.Equals(Vector2.right) || absNormalizedDistance.Equals(Vector2.up))
             {
+                print(absNormalizedDistance);
                 RotateTo(roundNormalizedDistance);
             }
             else
