@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             }
             else if (currentAction == 0)
             {
-                if (currentEntity.CanMoveTo(hoverObject.Vector2Position))
+                if (hoverObject.CompareTag("Walkable") && currentEntity.CanMoveTo(hoverObject.Vector2Position))
                 {
                     SetCursor(moveCursor);
                 }

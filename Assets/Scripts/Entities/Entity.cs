@@ -75,7 +75,7 @@ public abstract class Entity : Object
             Vector2 moveInFacingDirection = Vector2Position + facingDirection;
             Vector2 distanceFromMove = moveToPos - moveInFacingDirection;
 
-            return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(facingDirection);
+            return GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(GameManager.AbsVector2(facingDirection));
         }
     }
 
@@ -117,7 +117,7 @@ public abstract class Entity : Object
         Vector2 moveInFacingDirection = Vector2Position + facingDirection;
         Vector2 distanceFromMove = attack - moveInFacingDirection;
 
-        return distanceFromMove.Equals(Vector2.zero) || GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(facingDirection);
+        return distanceFromMove.Equals(Vector2.zero) || GameManager.AbsVector2(GameManager.FlipVector2(distanceFromMove)).Equals(GameManager.AbsVector2(facingDirection));
     }
 
     protected void TakeDamage(int damage)
