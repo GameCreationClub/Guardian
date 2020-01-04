@@ -108,8 +108,8 @@ public abstract class Entity : Object
         if (e != null && e != this)
         {
             print(name + " attacked " + e.name);
-            e.TakeDamage(atk);
             GameManager.instance.NextTurn();
+            e.TakeDamage(atk);
         }
     }
 

@@ -144,6 +144,11 @@ public class GameManager : MonoBehaviour
 
     public void RemoveEntity(Entity e)
     {
+        if (e.Equals(entities[currentEntityTurn]))
+        {
+            NextTurn();
+        }
+
         entities.Remove(e);
     }
 
