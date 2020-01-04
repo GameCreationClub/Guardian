@@ -17,10 +17,6 @@ public class Adventurer : Entity
         }
     }
 
-    public void Start()
-    {
-        Camera.main.GetComponent<CameraMovement>().trackedObject = gameObject;
-    }
     public override void MovementTurn()
     {
         print("Adventurer movement");

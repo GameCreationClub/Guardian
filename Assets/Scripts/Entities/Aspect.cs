@@ -10,7 +10,7 @@ public class Aspect : Entity
 
     public override void AttackTurn()
     {
-        base.AttackTurn();
+        //base.AttackTurn();
         print("Aspect attack");
         GameManager.instance.NextTurn();
     }

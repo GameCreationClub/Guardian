@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public GameObject trackedObject;
+    public Transform trackedObject;
     public float cameraPanSpeed = 1f;
 
-    void Update()
+    private void Update()
     {
-        Vector2 myPos = (Vector2)transform.position;
-        Vector2 trackedObjectPos = (Vector2)trackedObject.transform.position;
-        if(Vector2.Distance(myPos, trackedObjectPos) > 0.01){
+        Vector2 myPos = transform.position;
+        Vector2 trackedObjectPos = trackedObject.position;
+
+        if (Vector2.Distance(myPos, trackedObjectPos) > 0.01f)
+        {
             Vector2 lerped = Vector2.Lerp(myPos, trackedObjectPos, Time.deltaTime * cameraPanSpeed);
-            transform.position = new Vector3(lerped.x, lerped.y, transform.position.z); 
+            transform.position = new Vector3(lerped.x, lerped.y, transform.position.z);
         }
+    }
+
+    public void GoToPosition(Vector2 position)
+    {
+        transform.position = new Vector3(position.x, position.y, transform.position.z);
     }
 }

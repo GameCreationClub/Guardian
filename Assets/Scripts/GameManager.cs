@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private int currentEntityTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
 
+    private CameraMovement cameraMovement;
+
     private void Awake()
     {
         instance = this;
@@ -32,6 +34,9 @@ public class GameManager : MonoBehaviour
     {
         entities = new List<Entity>(FindObjectsOfType<Entity>());
         SortEntities();
+
+        cameraMovement = FindObjectOfType<CameraMovement>();
+        cameraMovement.GoToPosition(entities[0].transform.position);
 
         InvokeTurn();
     }
@@ -131,16 +136,19 @@ public class GameManager : MonoBehaviour
     public void InvokeTurn()
     {
         amountOfTurnsTaken += 0.5f;
-        if (amountOfTurnsTaken <= 5f)
+
+        Entity currentEntity = entities[currentEntityTurn];
+
+        if (currentAction == 0)
         {
-            if (currentAction == 0)
-            {
-                entities[currentEntityTurn].MovementTurn();
-            }
-            else
-            {
-                entities[currentEntityTurn].AttackTurn();
-            }
+            if (currentEntity.CompareTag("Player"))
+                cameraMovement.trackedObject = currentEntity.transform;
+
+            currentEntity.MovementTurn();
+        }
+        else
+        {
+            currentEntity.AttackTurn();
         }
     }
 

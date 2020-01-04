@@ -10,7 +10,7 @@ public class Gloom : Entity
 
     public override void AttackTurn()
     {
-        base.AttackTurn();
+        //base.AttackTurn();
         print("Gloom attack");
         GameManager.instance.NextTurn();
     }
