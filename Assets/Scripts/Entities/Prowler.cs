@@ -10,6 +10,7 @@ public class Prowler : Entity
 
     public override void AttackTurn()
     {
+        base.AttackTurn();
         print("Prowler attack");
         GameManager.instance.NextTurn();
     }

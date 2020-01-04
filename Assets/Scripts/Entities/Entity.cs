@@ -8,6 +8,7 @@ public abstract class Entity : Object
     public Vector2 facingDirection = Vector2.up;
 
     protected int maxHp;
+    private bool isPlayer;
 
     private Vector3 moveTo;
     private float moveIncrement;
@@ -15,6 +16,7 @@ public abstract class Entity : Object
     private void Awake()
     {
         maxHp = hp;
+        isPlayer = CompareTag("Player");
 
         moveIncrement = init * Time.fixedDeltaTime;
 
@@ -22,8 +24,30 @@ public abstract class Entity : Object
         facingDirection = Vector2.up;
     }
 
-    public abstract void MovementTurn();
-    public abstract void AttackTurn();
+    public virtual void MovementTurn()
+    {
+        print("Hi");
+    }
+
+    public virtual void AttackTurn()
+    {
+        Entity[] entities = FindObjectsOfType<Entity>();
+
+        foreach (Entity e in entities)
+        {
+            if ((isPlayer && e.CompareTag("Player")) || (!isPlayer && !e.CompareTag("Player")))
+                continue;
+
+            else
+            {
+                if (CanAttack(e.Vector2Position))
+                    return;
+            }
+        }
+
+        GameManager.instance.NextTurn();
+        return;
+    }
 
     public void Move(Vector2 direction)
     {
