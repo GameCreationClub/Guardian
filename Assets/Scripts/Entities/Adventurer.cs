@@ -19,13 +19,11 @@ public class Adventurer : Entity
 
     public override void MovementTurn()
     {
-        print("Adventurer movement");
         Mana += 10;
     }
 
     public override void AttackTurn()
     {
         base.AttackTurn();
-        print("Adventurer attack");
     }
 }

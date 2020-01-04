@@ -4,14 +4,12 @@ public class Prowler : Enemy
 {
     public override void MovementTurn()
     {
-        print("Prowler movement");
         MoveTo(new Vector2(6, 7));
     }
 
     public override void AttackTurn()
     {
         //base.AttackTurn();
-        print("Prowler attack");
         GameManager.instance.NextTurn();
     }
 }

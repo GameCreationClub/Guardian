@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Entity : Object
 {
     public int hp, atk, init;
-    public bool canRotate180;
+    public bool canRotate180, isDead = false;
     public Vector2 facingDirection = Vector2.up;
 
     protected int maxHp;
@@ -26,7 +26,6 @@ public abstract class Entity : Object
 
     public virtual void MovementTurn()
     {
-        print("Hi");
     }
 
     public virtual void AttackTurn()
@@ -134,9 +133,11 @@ public abstract class Entity : Object
     protected void Die()
     {
         print(name + " died");
-        GameManager.instance.RemoveEntity(this);
+        isDead = true;
+        gameObject.SetActive(false);
+        //GameManager.instance.RemoveEntity(this);
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     protected void ChangeHp(int change)

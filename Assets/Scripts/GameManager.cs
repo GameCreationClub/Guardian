@@ -144,11 +144,6 @@ public class GameManager : MonoBehaviour
 
     public void RemoveEntity(Entity e)
     {
-        if (e.Equals(entities[currentEntityTurn]))
-        {
-            NextTurn();
-        }
-
         entities.Remove(e);
     }
 
@@ -171,8 +166,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NextTurn()
+    private IEnumerator NextTurnDelayed(float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         currentAction++;
 
         if (currentHover != null)
@@ -189,7 +186,18 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (entities[currentEntityTurn].isDead)
+        {
+            StartCoroutine(NextTurnDelayed(0));
+            yield break;
+        }
+
         InvokeTurn();
+    }
+
+    public void NextTurn()
+    {
+        StartCoroutine(NextTurnDelayed(0.01f));
     }
 
     public void OnObjectMouseEnter(Object o)

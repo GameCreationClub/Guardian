@@ -12,12 +12,10 @@ public class Gloom : Enemy
 
     public override void MovementTurn()
     {
-        print("Gloom movement");
-
         currentTarget = players[0];
         for (int i = 1; i < players.Length; i++)
         {
-            if (Vector2.Distance(Vector2Position, players[i].Vector2Position) < Vector2.Distance(Vector2Position, currentTarget.Vector2Position))
+            if (Vector2.Distance(Vector2Position, players[i].Vector2Position) < Vector2.Distance(Vector2Position, currentTarget.Vector2Position) || currentTarget.isDead)
                 currentTarget = players[i];
         }
 
@@ -34,8 +32,6 @@ public class Gloom : Enemy
 
     public override void AttackTurn()
     {
-        print("Gloom attack");
-
         if (CanAttack(currentTarget.Vector2Position))
             Attack(currentTarget);
         else
