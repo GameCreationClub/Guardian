@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Prowler : Entity
+public class Prowler : Enemy
 {
     public override void MovementTurn()
     {

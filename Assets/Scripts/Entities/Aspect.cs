@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Aspect : Entity
+public class Aspect : Enemy
 {
     public override void MovementTurn()
     {

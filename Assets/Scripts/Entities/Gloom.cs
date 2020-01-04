@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Gloom : Entity
+public class Gloom : Enemy
 {
     private Entity[] players;
     private Entity currentTarget;
@@ -29,43 +29,7 @@ public class Gloom : Entity
             return;
         }
 
-        if ((currentTargetPosition - Vector2Position).normalized.Equals(facingDirection))
-        {
-            if (Vector2.Distance(Vector2Position, currentTargetPosition) > 1.42f)
-            {
-                Move(facingDirection * init);
-            }
-            else if (Vector2.Distance(Vector2Position, currentTargetPosition) >= 1f)
-            {
-                Move(facingDirection);
-            }
-            else
-            {
-                GameManager.instance.NextTurn();
-            }
-        }
-        else
-        {
-            Vector2 normalizedDistance = (currentTarget.Vector2Position - Vector2Position).normalized;
-            Vector2 absNormalizedDistance = GameManager.AbsVector2(normalizedDistance);
-            Vector2 roundNormalizedDistance = GameManager.RoundVector2(normalizedDistance);
-
-            if (absNormalizedDistance.Equals(Vector2.right) || absNormalizedDistance.Equals(Vector2.up))
-            {
-                RotateTo(roundNormalizedDistance);
-            }
-            else
-            {
-                if (facingDirection.Equals(roundNormalizedDistance))
-                {
-                    Move(GameManager.ExtremeCeilVector2(normalizedDistance));
-                }
-                else
-                {
-                    RotateTo(roundNormalizedDistance);
-                }
-            }
-        }
+        MovementAi(currentTarget, currentTargetPosition);
     }
 
     public override void AttackTurn()
