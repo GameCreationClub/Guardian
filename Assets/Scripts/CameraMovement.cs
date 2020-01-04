@@ -9,13 +9,16 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        Vector2 myPos = transform.position;
-        Vector2 trackedObjectPos = trackedObject.position;
-
-        if (Vector2.Distance(myPos, trackedObjectPos) > 0.01f)
+        if (trackedObject != null)
         {
-            Vector2 lerped = Vector2.Lerp(myPos, trackedObjectPos, Time.deltaTime * cameraPanSpeed);
-            transform.position = new Vector3(lerped.x, lerped.y, transform.position.z);
+            Vector2 myPos = transform.position;
+            Vector2 trackedObjectPos = trackedObject.position;
+
+            if (Vector2.Distance(myPos, trackedObjectPos) > 0.01f)
+            {
+                Vector2 lerped = Vector2.Lerp(myPos, trackedObjectPos, Time.deltaTime * cameraPanSpeed);
+                transform.position = new Vector3(lerped.x, lerped.y, transform.position.z);
+            }
         }
     }
 

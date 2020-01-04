@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Transform hover;
 
     public List<Entity> entities;
+    public List<Entity> players;
 
     private Object currentHover;
 
@@ -35,6 +36,14 @@ public class GameManager : MonoBehaviour
     {
         entities = new List<Entity>(FindObjectsOfType<Entity>());
         SortEntities();
+
+        foreach (Entity e in entities)
+        {
+            if (e.CompareTag("Player"))
+            {
+                players.Add(e);
+            }
+        }
 
         cameraMovement = FindObjectOfType<CameraMovement>();
         cameraMovement.GoToPosition(entities[0].transform.position);
@@ -177,10 +186,6 @@ public class GameManager : MonoBehaviour
 
         InvokeTurn();
     }
-    public void SkipTurn()
-    {
-        NextTurn();
-    }
 
     public void OnObjectMouseEnter(Object o)
     {
@@ -258,6 +263,19 @@ public class GameManager : MonoBehaviour
     {
         return new Vector2(v.y, v.x);
     }
+
+    public static Vector2 RoundVector2(Vector2 v)
+    {
+        return new Vector2(Mathf.Round(v.x), Mathf.Round(v.y));
+    }
+
+    public static Vector2 ExtremeCeilVector2(Vector2 v)
+    {
+        return new Vector2
+            ((v.x > 0) ? Mathf.Ceil(v.x) : (v.x < 0) ? Mathf.Floor(v.x) : 0,
+            (v.y > 0) ? Mathf.Ceil(v.y) : (v.y < 0) ? Mathf.Floor(v.y) : 0);
+    }
+
     public void UpdateManaBar(int newMana)
     {
         manaBar.value = newMana;

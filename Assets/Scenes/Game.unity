@@ -327,6 +327,7 @@ MonoBehaviour:
   manaBar: {fileID: 1539731116}
   hover: {fileID: 36365493}
   entities: []
+  players: []
 --- !u!1 &137098832
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +913,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 112942908}
-        m_MethodName: SkipTurn
+        m_MethodName: NextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
