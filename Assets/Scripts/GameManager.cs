@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Sprite moveCursor;
     public Sprite rotateCursor;
     public Sprite attackCursor;
+    public Sprite skipCursor;
 
     public Slider manaBar;
     public Transform hover;
@@ -74,7 +75,11 @@ public class GameManager : MonoBehaviour
             hover.gameObject.SetActive(true);
             hover.position = hoverObject.transform.position;
 
-            if (currentAction == 0)
+            if (currentEntity.Equals(hoverObject))
+            {
+                SetCursor(skipCursor);
+            }
+            else if (currentAction == 0)
             {
                 if (currentEntity.CanMoveTo(hoverObject.Vector2Position))
                 {
@@ -194,7 +199,11 @@ public class GameManager : MonoBehaviour
     {
         Entity currentEntity = entities[currentEntityTurn];
 
-        if (currentEntity.CompareTag("Player"))
+        if (currentEntity.Equals(o))
+        {
+            NextTurn();
+        }
+        else if (currentEntity.CompareTag("Player"))
         {
             if (currentAction == 0)
             {

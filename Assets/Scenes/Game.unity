@@ -323,6 +323,7 @@ MonoBehaviour:
   moveCursor: {fileID: 21300000, guid: ed712c696c7bfa542b6b647489080923, type: 3}
   rotateCursor: {fileID: 21300000, guid: a0497e8a3d9abf6409f792dd81941e46, type: 3}
   attackCursor: {fileID: 21300000, guid: 02e0614f5472b254bb81e0424d1db3ba, type: 3}
+  skipCursor: {fileID: 21300000, guid: 05b80bf9c9c6ae24b98d22e80dbd10b4, type: 3}
   manaBar: {fileID: 1539731116}
   hover: {fileID: 36365493}
   entities: []
