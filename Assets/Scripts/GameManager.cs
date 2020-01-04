@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Slider manaBar;
     public Transform hover;
 
-    [SerializeField] private List<Entity> entities;
+    public List<Entity> entities;
 
     private Object currentHover;
 

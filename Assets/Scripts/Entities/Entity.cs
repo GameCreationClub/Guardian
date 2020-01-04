@@ -31,7 +31,7 @@ public abstract class Entity : Object
 
     public virtual void AttackTurn()
     {
-        Entity[] entities = FindObjectsOfType<Entity>();
+        Entity[] entities = GameManager.instance.entities.ToArray();
 
         foreach (Entity e in entities)
         {
