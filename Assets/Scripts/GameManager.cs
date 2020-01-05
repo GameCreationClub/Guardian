@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Entity e in entities)
         {
-            if (e.Vector2Position.Equals(position))
+            if (e.Vector2Position.Equals(position) && !e.isDead)
                 return true;
         }
 
