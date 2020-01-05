@@ -324,9 +324,11 @@ MonoBehaviour:
   rotateCursor: {fileID: 21300000, guid: a0497e8a3d9abf6409f792dd81941e46, type: 3}
   attackCursor: {fileID: 21300000, guid: 02e0614f5472b254bb81e0424d1db3ba, type: 3}
   skipCursor: {fileID: 21300000, guid: 05b80bf9c9c6ae24b98d22e80dbd10b4, type: 3}
-  pointer: {fileID: 1663217273}
   manaBar: {fileID: 1539731116}
+  moveMarkerPrefab: {fileID: 9157600224349887907, guid: c75b58031061ce145a0fc2e3d5e432dd,
+    type: 3}
   hover: {fileID: 36365493}
+  pointer: {fileID: 1663217273}
   entities: []
   players: []
 --- !u!1 &137098832

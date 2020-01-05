@@ -15,12 +15,18 @@ public class GameManager : MonoBehaviour
     public Sprite skipCursor;
 
     public Slider manaBar;
+
+    public GameObject moveMarkerPrefab;
     public Transform hover, pointer;
 
     public List<Entity> entities;
     public List<Entity> players;
 
+    private GameObject[] walkables;
+
     private Object currentHover;
+
+    private Transform[] moveMarkers = new Transform[5];
 
     private int currentEntityTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
@@ -45,8 +51,16 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        walkables = GameObject.FindGameObjectsWithTag("Walkable");
+
         cameraMovement = FindObjectOfType<CameraMovement>();
         cameraMovement.GoToPosition(entities[0].transform.position);
+
+        for (int i = 0; i < moveMarkers.Length; i++)
+        {
+            moveMarkers[i] = Instantiate(moveMarkerPrefab).transform;
+            moveMarkers[i].gameObject.SetActive(false);
+        }
 
         InvokeTurn();
     }
@@ -118,11 +132,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ShowMoveMarker(int index, Vector2 position)
+    {
+        moveMarkers[index].gameObject.SetActive(true);
+        moveMarkers[index].position = position;
+    }
+
     public bool IsEntityAtPosition(Vector2 position)
     {
         foreach (Entity e in entities)
         {
             if (e.Vector2Position.Equals(position))
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool IsWalkableAtPosition(Vector2 position)
+    {
+        foreach (GameObject o in walkables)
+        {
+            if (o.transform.position.Equals(position))
                 return true;
         }
 
@@ -168,8 +199,40 @@ public class GameManager : MonoBehaviour
 
         if (currentAction == 0)
         {
+            int moveMarkersUsed = 0;
             if (currentEntity.CompareTag("Player"))
+            {
                 cameraMovement.trackedObject = currentEntity.transform;
+
+                for (moveMarkersUsed = 0; moveMarkersUsed < currentEntity.init; moveMarkersUsed++)
+                {
+                    Vector2 moveMarkerPosition = currentEntity.Vector2Position + currentEntity.facingDirection * (moveMarkersUsed + 1);
+
+                    if (!IsEntityAtPosition(moveMarkerPosition) && IsWalkableAtPosition(moveMarkerPosition))
+                        ShowMoveMarker(moveMarkersUsed, moveMarkerPosition);
+                }
+
+                Vector2 flippedFacingDirection = FlipVector2(currentEntity.facingDirection);
+                Vector2 diagonal1Position = currentEntity.Vector2Position + currentEntity.facingDirection + flippedFacingDirection;
+                Vector2 diagonal2Position = currentEntity.Vector2Position + currentEntity.facingDirection + flippedFacingDirection * -1;
+
+                if (!IsEntityAtPosition(diagonal1Position) && IsWalkableAtPosition(diagonal1Position))
+                {
+                    ShowMoveMarker(moveMarkersUsed, diagonal1Position);
+                    moveMarkersUsed++;
+                }
+
+                if (!IsEntityAtPosition(diagonal2Position) && IsWalkableAtPosition(diagonal2Position))
+                {
+                    ShowMoveMarker(moveMarkersUsed, diagonal2Position);
+                    moveMarkersUsed++;
+                }
+            }
+
+            for (int j = moveMarkers.Length - 1; j >= moveMarkersUsed; j--)
+            {
+                moveMarkers[j].gameObject.SetActive(false);
+            }
 
             currentEntity.MovementTurn();
         }
