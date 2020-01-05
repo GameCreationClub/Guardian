@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
             {
                 Vector2 moveMarkerPosition = currentEntity.Vector2Position + currentEntity.facingDirection * (moveMarkersUsed + 1);
 
-                if (!IsEntityAtPosition(moveMarkerPosition) && IsWalkableAtPosition(moveMarkerPosition))
+                if (currentEntity.CanMoveTo(moveMarkerPosition))
                     ShowMoveMarker(moveMarkersUsed, moveMarkerPosition);
             }
 
@@ -159,13 +159,13 @@ public class GameManager : MonoBehaviour
             Vector2 diagonal1Position = currentEntity.Vector2Position + currentEntity.facingDirection + flippedFacingDirection;
             Vector2 diagonal2Position = currentEntity.Vector2Position + currentEntity.facingDirection + flippedFacingDirection * -1;
 
-            if (!IsEntityAtPosition(diagonal1Position) && IsWalkableAtPosition(diagonal1Position))
+            if (currentEntity.CanMoveTo(diagonal1Position))
             {
                 ShowMoveMarker(moveMarkersUsed, diagonal1Position);
                 moveMarkersUsed++;
             }
 
-            if (!IsEntityAtPosition(diagonal2Position) && IsWalkableAtPosition(diagonal2Position))
+            if (currentEntity.CanMoveTo(diagonal2Position))
             {
                 ShowMoveMarker(moveMarkersUsed, diagonal2Position);
                 moveMarkersUsed++;
@@ -198,6 +198,19 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool IsPathValid(Vector2 start, Vector2 end)
+    {
+        Vector2 direction = (end - start).normalized;
+
+        for (int i = 0; i < Vector2.Distance(start, end); i++)
+        {
+            if (IsEntityAtPosition(start + direction * (i + 1)))
+                return false;
+        }
+
+        return true;
     }
 
     public void SortEntities()

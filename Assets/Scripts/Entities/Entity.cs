@@ -73,11 +73,14 @@ public abstract class Entity : Object
 
     public bool CanMoveTo(Vector2 moveToPos)
     {
-        if (GameManager.instance.IsEntityAtPosition(moveToPos))
+        if (GameManager.instance.IsEntityAtPosition(moveToPos) || !GameManager.instance.IsWalkableAtPosition(moveToPos))
             return false;
 
         else
         {
+            if (!GameManager.instance.IsPathValid(Vector2Position, moveToPos))
+                return false;
+
             if ((moveToPos - Vector2Position).normalized.Equals(facingDirection))
             {
                 return Vector2.Distance(moveToPos, Vector2Position) <= init;
