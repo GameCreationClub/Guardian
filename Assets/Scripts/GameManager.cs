@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -214,7 +215,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        for (int i = rotateMarkers.Length - 1; i > rotateMarkersUsed; i--)
+        for (int i = rotateMarkers.Length - 1; i >= rotateMarkersUsed; i--)
         {
             rotateMarkers[i].gameObject.SetActive(false);
         }
@@ -416,6 +417,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PlayerExit()
+    {
+        SceneManager.LoadScene("ChooseLevel", LoadSceneMode.Single);
     }
 
     public static Vector2 AbsVector2(Vector2 v)

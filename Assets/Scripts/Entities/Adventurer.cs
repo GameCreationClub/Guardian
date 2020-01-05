@@ -27,4 +27,10 @@ public class Adventurer : Entity
         //base.AttackTurn();
         GameManager.instance.NextTurn();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Exit"))
+            GameManager.instance.PlayerExit();
+    }
 }

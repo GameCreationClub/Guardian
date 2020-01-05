@@ -6,4 +6,10 @@ public class Guardian : Entity
     {
         base.AttackTurn();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Exit"))
+            GameManager.instance.PlayerExit();
+    }
 }
