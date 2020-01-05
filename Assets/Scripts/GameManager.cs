@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Slider manaBar;
 
     public GameObject moveMarkerPrefab;
+    public GameObject rotateMarkerPrefab;
     public Transform hover, pointer;
 
     public List<Entity> entities;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     private Object currentHover;
 
     private Transform[] moveMarkers = new Transform[5];
+    private Transform[] rotateMarkers = new Transform[3];
 
     private int currentEntityTurn = 0, currentAction = 0;
     private float amountOfTurnsTaken = 0f;
@@ -62,8 +64,15 @@ public class GameManager : MonoBehaviour
             moveMarkers[i].gameObject.SetActive(false);
         }
 
+        for (int i = 0; i < rotateMarkers.Length; i++)
+        {
+            rotateMarkers[i] = Instantiate(rotateMarkerPrefab).transform;
+            rotateMarkers[i].gameObject.SetActive(false);
+        }
+
         InvokeTurn();
         UpdateMoveMarkers();
+        UpdateRotateMarkers();
     }
 
     private void Update()
@@ -178,6 +187,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ShowRotateMarker(int index, Vector2 position)
+    {
+        rotateMarkers[index].gameObject.SetActive(true);
+        rotateMarkers[index].position = position;
+    }
+
+    private void UpdateRotateMarkers()
+    {
+        Entity currentEntity = entities[currentEntityTurn];
+        int rotateMarkersUsed = 0;
+
+        if (currentEntity.CompareTag("Player") && currentAction == 0)
+        {
+            Vector2 flippedFacingDirection = FlipVector2(currentEntity.facingDirection);
+
+            ShowRotateMarker(0, currentEntity.Vector2Position + flippedFacingDirection);
+            ShowRotateMarker(1, currentEntity.Vector2Position + flippedFacingDirection * -1);
+
+            rotateMarkersUsed += 2;
+
+            if (currentEntity.canRotate180)
+            {
+                ShowRotateMarker(2, currentEntity.Vector2Position + currentEntity.facingDirection * -1);
+                rotateMarkersUsed++;
+            }
+        }
+
+        for (int i = rotateMarkers.Length - 1; i > rotateMarkersUsed; i--)
+        {
+            rotateMarkers[i].gameObject.SetActive(false);
+        }
+    }
+
     public bool IsEntityAtPosition(Vector2 position)
     {
         foreach (Entity e in entities)
@@ -251,6 +293,7 @@ public class GameManager : MonoBehaviour
         pointer.position = currentEntity.Vector2Position + Vector2.up * 0.8f;
 
         UpdateMoveMarkers();
+        UpdateRotateMarkers();
 
         if (currentAction == 0)
         {
@@ -277,6 +320,7 @@ public class GameManager : MonoBehaviour
             UpdateCursor(currentHover.GetComponent<Object>());
 
         UpdateMoveMarkers();
+        UpdateRotateMarkers();
 
         if (currentAction > 1)
         {

@@ -327,6 +327,8 @@ MonoBehaviour:
   manaBar: {fileID: 1539731116}
   moveMarkerPrefab: {fileID: 9157600224349887907, guid: c75b58031061ce145a0fc2e3d5e432dd,
     type: 3}
+  rotateMarkerPrefab: {fileID: 6236187822848131435, guid: 16850bd9f2aee02419471a42b482eec7,
+    type: 3}
   hover: {fileID: 36365493}
   pointer: {fileID: 1663217273}
   entities: []
