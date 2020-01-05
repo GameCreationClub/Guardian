@@ -53,6 +53,12 @@ public abstract class Entity : Object
         MoveTo(Vector2Position + direction);
     }
 
+    public void KnockBack(Vector2 direction)
+    {
+        Vector2Position += direction;
+        transform.position += (Vector3)direction;
+    }
+
     public void MoveTo(Vector2 position)
     {
         X = (int)position.x;

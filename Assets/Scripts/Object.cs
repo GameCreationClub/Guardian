@@ -9,6 +9,7 @@ public class Object : MonoBehaviour
     public Vector2 Vector2Position
     {
         get { return new Vector2(X, Y); }
+        set { X = (int)value.x; Y = (int)value.y; }
     }
     public Vector3 Vector3Position
     {

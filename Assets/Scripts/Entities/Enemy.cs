@@ -29,7 +29,6 @@ public class Enemy : Entity
 
             if (absNormalizedDistance.Equals(Vector2.right) || absNormalizedDistance.Equals(Vector2.up))
             {
-                print(absNormalizedDistance);
                 RotateTo(roundNormalizedDistance);
             }
             else

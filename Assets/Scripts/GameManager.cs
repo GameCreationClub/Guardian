@@ -336,7 +336,11 @@ public class GameManager : MonoBehaviour
                 {
                     if (currentEntity.CanAttack(o.Vector2Position))
                     {
-                        currentEntity.Attack(o.GetComponent<Entity>());
+                        Entity enemy = o.GetComponent<Entity>();
+                        currentEntity.Attack(enemy);
+
+                        if (currentEntity is Guardian)
+                            enemy.KnockBack(currentEntity.facingDirection);
                     }
                 }
             }
