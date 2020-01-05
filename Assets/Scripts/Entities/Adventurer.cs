@@ -24,6 +24,7 @@ public class Adventurer : Entity
 
     public override void AttackTurn()
     {
-        base.AttackTurn();
+        //base.AttackTurn();
+        GameManager.instance.NextTurn();
     }
 }
