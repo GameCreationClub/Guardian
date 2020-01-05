@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Sprite skipCursor;
 
     public Slider manaBar;
-    public Transform hover;
+    public Transform hover, pointer;
 
     public List<Entity> entities;
     public List<Entity> players;
@@ -163,6 +163,8 @@ public class GameManager : MonoBehaviour
         amountOfTurnsTaken += 0.5f;
 
         Entity currentEntity = entities[currentEntityTurn];
+        pointer.SetParent(currentEntity.transform);
+        pointer.position = currentEntity.Vector2Position + Vector2.up * 0.8f;
 
         if (currentAction == 0)
         {
