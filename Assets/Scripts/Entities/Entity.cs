@@ -64,9 +64,11 @@ public abstract class Entity : Object
         X = (int)position.x;
         Y = (int)position.y;
         moveTo = Vector2Position;
+        transform.position = Vector2Position;
+        GameManager.instance.NextTurn();
 
-        StopCoroutine(MovementAnimation());
-        StartCoroutine(MovementAnimation());
+        /*StopCoroutine(MovementAnimation());
+        StartCoroutine(MovementAnimation());*/
     }
 
     public bool CanMoveTo(Vector2 moveToPos)
