@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
     public List<Entity> entities;
     public List<Entity> players;
 
+    public Transform turnOrderParent;
+    public GameObject turnImagePrefab;
+
+    private Image[] turnOrderImages;
+    private Color
+        defaultTurnOrderFrameColor = new Color(0.8196f, 0.8196f, 0.8196f),
+        selectedTurnOrderFrameColor = new Color(0.3647f, 0.7372f, 0.8235f);
+
     private GameObject[] walkables;
 
     private Object currentHover;
@@ -272,6 +280,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        turnOrderImages = new Image[entities.Count];
+
+        for (int i = 0; i < entities.Count; i++)
+        {
+            turnOrderImages[i] = Instantiate(turnImagePrefab, turnOrderParent).GetComponent<Image>();
+            turnOrderImages[i].transform.GetChild(1).GetComponent<Image>().sprite = entities[i].GetComponent<SpriteRenderer>().sprite;
+        }
     }
 
     public void AddEntity(Entity e)
@@ -292,9 +308,12 @@ public class GameManager : MonoBehaviour
         Entity currentEntity = entities[currentEntityTurn];
         pointer.SetParent(currentEntity.transform);
         pointer.position = currentEntity.Vector2Position + Vector2.up * 0.8f;
+        turnOrderImages[currentEntityTurn].color = selectedTurnOrderFrameColor;
 
         UpdateMoveMarkers();
         UpdateRotateMarkers();
+
+
 
         if (currentAction == 0)
         {
@@ -322,6 +341,8 @@ public class GameManager : MonoBehaviour
 
         UpdateMoveMarkers();
         UpdateRotateMarkers();
+
+        turnOrderImages[currentEntityTurn].color = defaultTurnOrderFrameColor;
 
         if (currentAction > 1)
         {
