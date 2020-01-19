@@ -374,8 +374,7 @@ public class GameManager : MonoBehaviour
                 currentEntityTurn = 0;
             }
 
-            if (entities[currentEntityTurn] is Adventurer)
-                adventurerMovedOnTurn = false;
+            adventurerMovedOnTurn = false;
         }
 
         if (entities[currentEntityTurn].isDead)
@@ -424,6 +423,9 @@ public class GameManager : MonoBehaviour
                     if (currentEntity.CanRotateTo(rotateTo))
                     {
                         currentEntity.RotateTo(rotateTo);
+
+                        if (currentEntity is Adventurer)
+                            adventurerMovedOnTurn = true;
                     }
                 }
                 else
@@ -444,6 +446,9 @@ public class GameManager : MonoBehaviour
                             if (currentEntity.CanRotateTo(rotateTo))
                             {
                                 currentEntity.RotateTo(rotateTo);
+
+                                if (currentEntity is Adventurer)
+                                    adventurerMovedOnTurn = true;
                             }
                         }
                     }
