@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject moveMarkerPrefab;
     public GameObject rotateMarkerPrefab;
-    public Transform hover, pointer;
+    public Transform hover, pointer, facingArrow;
 
     public List<Entity> entities;
     public List<Entity> players;
@@ -317,6 +317,18 @@ public class GameManager : MonoBehaviour
 
         if (currentAction == 0)
         {
+            facingArrow.gameObject.SetActive(true);
+            facingArrow.position = currentEntity.Vector2Position;
+
+            if (currentEntity.facingDirection.Equals(Vector2.up))
+                facingArrow.rotation = Quaternion.identity;
+            else if (currentEntity.facingDirection.Equals(Vector2.right))
+                facingArrow.rotation = Quaternion.Euler(0, 0, 270);
+            else if (currentEntity.facingDirection.Equals(Vector2.down))
+                facingArrow.rotation = Quaternion.Euler(0, 0, 180);
+            else if (currentEntity.facingDirection.Equals(Vector2.left))
+                facingArrow.rotation = Quaternion.Euler(0, 0, 90);
+
             if (currentEntity.CompareTag("Player"))
             {
                 cameraMovement.trackedObject = currentEntity.transform;
@@ -326,6 +338,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            facingArrow.gameObject.SetActive(false);
+
             if (adventurerMovedOnTurn)
             {
                 NextTurn();
