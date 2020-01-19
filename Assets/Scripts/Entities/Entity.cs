@@ -10,6 +10,8 @@ public abstract class Entity : Object
     protected int maxHp;
     private bool isPlayer;
 
+    private HealthBar healthBar;
+
     private Vector3 moveTo;
     private float moveIncrement;
 
@@ -17,6 +19,8 @@ public abstract class Entity : Object
     {
         maxHp = hp;
         isPlayer = CompareTag("Player");
+
+        healthBar = transform.GetComponentInChildren<HealthBar>();
 
         moveIncrement = init * Time.deltaTime;
 
@@ -167,6 +171,8 @@ public abstract class Entity : Object
         {
             hp = maxHp;
         }
+
+        healthBar.SetPercentFill((float)hp / (float)maxHp);
     }
 
     protected IEnumerator MovementAnimation()
