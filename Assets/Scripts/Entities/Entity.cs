@@ -45,14 +45,6 @@ public abstract class Entity : Object
                 if (isPlayer != e.CompareTag("Player") && CanAttack(e.Vector2Position))
                     return;
             }
-            /*if ((isPlayer && e.CompareTag("Player")) || (!isPlayer && !e.CompareTag("Player")))
-                continue;
-
-            else
-            {
-                if (CanAttack(e.Vector2Position))
-                    return;
-            }*/
         }
 
         GameManager.instance.NextTurn();
@@ -66,8 +58,17 @@ public abstract class Entity : Object
 
     public void KnockBack(Vector2 direction)
     {
-        Vector2Position += direction;
-        transform.position += (Vector3)direction;
+        Vector2 newPosition = Vector2Position + direction;
+
+        if (GameManager.instance.IsWalkableAtPosition(newPosition))
+        {
+            Vector2Position = newPosition;
+            transform.position = newPosition;
+        }
+        else
+        {
+            TakeDamage(1);
+        }
     }
 
     public void MoveTo(Vector2 position)

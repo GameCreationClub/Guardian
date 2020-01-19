@@ -244,6 +244,9 @@ public class GameManager : MonoBehaviour
 
     public bool IsWalkableAtPosition(Vector2 position)
     {
+        if (IsEntityAtPosition(position))
+            return false;
+
         foreach (GameObject o in walkables)
         {
             if (o.transform.position.Equals(position))
