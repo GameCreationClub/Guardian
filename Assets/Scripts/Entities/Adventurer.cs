@@ -24,8 +24,8 @@ public class Adventurer : Entity
 
     public override void AttackTurn()
     {
-        //base.AttackTurn();
-        GameManager.instance.NextTurn();
+        base.AttackTurn();
+        //GameManager.instance.NextTurn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

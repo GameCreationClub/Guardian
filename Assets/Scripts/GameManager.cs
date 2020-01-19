@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public Transform turnOrderParent;
     public GameObject turnImagePrefab;
 
+    private bool adventurerMovedOnTurn = false;
+
     private Image[] turnOrderImages;
     private Color
         defaultTurnOrderFrameColor = new Color(0.8196f, 0.8196f, 0.8196f),
@@ -313,8 +315,6 @@ public class GameManager : MonoBehaviour
         UpdateMoveMarkers();
         UpdateRotateMarkers();
 
-
-
         if (currentAction == 0)
         {
             if (currentEntity.CompareTag("Player"))
@@ -326,6 +326,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (adventurerMovedOnTurn)
+            {
+                NextTurn();
+                return;
+            }
+
             currentEntity.AttackTurn();
         }
     }
@@ -353,6 +359,9 @@ public class GameManager : MonoBehaviour
             {
                 currentEntityTurn = 0;
             }
+
+            if (entities[currentEntityTurn] is Adventurer)
+                adventurerMovedOnTurn = false;
         }
 
         if (entities[currentEntityTurn].isDead)
@@ -410,6 +419,9 @@ public class GameManager : MonoBehaviour
                         if (currentEntity.CanMoveTo(o.Vector2Position))
                         {
                             currentEntity.MoveTo(o.Vector2Position);
+
+                            if (currentEntity is Adventurer)
+                                adventurerMovedOnTurn = true;
                         }
                         else
                         {
