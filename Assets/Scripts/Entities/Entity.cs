@@ -38,14 +38,21 @@ public abstract class Entity : Object
 
         foreach (Entity e in entities)
         {
-            if ((isPlayer && e.CompareTag("Player")) || (!isPlayer && !e.CompareTag("Player")))
+            if (e.isDead)
+                continue;
+            else
+            {
+                if (isPlayer != e.CompareTag("Player") && CanAttack(e.Vector2Position))
+                    return;
+            }
+            /*if ((isPlayer && e.CompareTag("Player")) || (!isPlayer && !e.CompareTag("Player")))
                 continue;
 
             else
             {
                 if (CanAttack(e.Vector2Position))
                     return;
-            }
+            }*/
         }
 
         GameManager.instance.NextTurn();
