@@ -8,7 +8,7 @@ public class Enemy : Entity
 
     public GameObject moveToIndicator;
 
-    private void Awake()
+    protected void Start()
     {
         animator = GetComponent<Animator>();
         moveToIndicator = GameManager.instance.enemyMoveTo;

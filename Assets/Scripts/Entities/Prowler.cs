@@ -4,8 +4,9 @@ public class Prowler : Enemy
 {
     private Entity currentTarget, adventurer, guardian;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         adventurer = FindObjectOfType<Adventurer>();
         guardian = FindObjectOfType<Guardian>();
     }

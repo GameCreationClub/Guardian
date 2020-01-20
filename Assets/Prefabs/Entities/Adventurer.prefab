@@ -149,6 +149,7 @@ MonoBehaviour:
   canRotate180: 1
   isDead: 0
   facingDirection: {x: 0, y: 0}
+  healthBar: {fileID: 9183663247512977521}
 --- !u!1001 &8871027268365091011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,3 +225,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8871027268365091011}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9183663247512977521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 319427222343958706, guid: 41fac9c995a01914d94a3fc39f0e14b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8871027268365091011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625e4244af75adc4786609e4b1b5d6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5,8 +5,9 @@ public class Gloom : Enemy
     private Entity[] players;
     private Entity currentTarget;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         players = GameManager.instance.players.ToArray();
     }
 
