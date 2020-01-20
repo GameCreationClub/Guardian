@@ -51,7 +51,7 @@ public abstract class Entity : Object
         return;
     }
 
-    public void Move(Vector2 direction)
+    public virtual void Move(Vector2 direction)
     {
         MoveTo(Vector2Position + direction);
     }

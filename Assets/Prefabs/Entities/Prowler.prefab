@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1848719490525993410}
   - component: {fileID: 4418121967676953292}
   - component: {fileID: -3247774430087553729}
+  - component: {fileID: -5654449462775552859}
   - component: {fileID: -8531596049451277732}
   m_Layer: 0
   m_Name: Prowler
@@ -109,6 +110,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &-5654449462775552859
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263476809309130508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 186d255a535d752469691922c1f48dae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-8531596049451277732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +147,7 @@ MonoBehaviour:
   canRotate180: 1
   isDead: 0
   facingDirection: {x: 0, y: 0}
+  moveToIndicator: {fileID: 0}
 --- !u!1001 &6668730570909005055
 PrefabInstance:
   m_ObjectHideFlags: 0

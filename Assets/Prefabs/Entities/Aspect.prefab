@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6612996945226411769}
   - component: {fileID: 6612996945226411782}
   - component: {fileID: 266931453416617694}
+  - component: {fileID: 470544664182097883}
   - component: {fileID: 6817481504770981459}
   m_Layer: 0
   m_Name: Aspect
@@ -109,6 +110,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &470544664182097883
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612996945226411783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6817481504770981459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +147,7 @@ MonoBehaviour:
   canRotate180: 1
   isDead: 0
   facingDirection: {x: 0, y: 0}
+  moveToIndicator: {fileID: 0}
 --- !u!1001 &3258128478571828686
 PrefabInstance:
   m_ObjectHideFlags: 0

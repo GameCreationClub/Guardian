@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    private Animator animator;
+
+    public GameObject moveToIndicator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        moveToIndicator = GameManager.instance.enemyMoveTo;
+    }
+
     protected void MovementAi(Entity currentTarget, Vector2 currentTargetPositionAim)
     {
         if ((currentTargetPositionAim - Vector2Position).normalized.Equals(facingDirection))
@@ -43,5 +53,24 @@ public class Enemy : Entity
                 }
             }
         }
+    }
+
+    public override void Move(Vector2 direction)
+    {
+        StartCoroutine(MoveCoroutine(direction));
+    }
+
+    private IEnumerator MoveCoroutine(Vector2 direction)
+    {
+        Vector2 moveTo = Vector2Position + direction;
+        moveToIndicator.transform.position = moveTo;
+        moveToIndicator.SetActive(true);
+        animator.Play("Enemy_Fade_Out");
+
+        yield return new WaitForSeconds(1f);
+
+        moveToIndicator.SetActive(false);
+        animator.Play("Enemy_Fade_In");
+        MoveTo(moveTo);
     }
 }

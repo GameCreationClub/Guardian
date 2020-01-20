@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5877778852617411896}
   - component: {fileID: 5877778852617411899}
   - component: {fileID: -977798188279715872}
+  - component: {fileID: 5383948662821951879}
   - component: {fileID: 3919701631101631998}
   m_Layer: 0
   m_Name: Gloom
@@ -109,6 +110,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &5383948662821951879
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877778852617411898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 186d255a535d752469691922c1f48dae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3919701631101631998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +147,7 @@ MonoBehaviour:
   canRotate180: 1
   isDead: 0
   facingDirection: {x: 0, y: 0}
+  moveToIndicator: {fileID: 0}
 --- !u!1001 &5329449026323626876
 PrefabInstance:
   m_ObjectHideFlags: 0

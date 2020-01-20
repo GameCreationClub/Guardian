@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public Transform turnOrderParent;
     public GameObject turnImagePrefab;
+    public GameObject enemyMoveTo;
 
     private bool adventurerMovedOnTurn = false;
 
